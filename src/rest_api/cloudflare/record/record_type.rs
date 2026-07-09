@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Copy, Clone)]
-pub enum RecordType { A, AAAA, NS }
+pub enum RecordType { A, AAAA, CNAME, NS, MX, TXT }
 
 impl PartialEq for RecordType {
     fn eq(&self, other: &Self) -> bool {
@@ -27,7 +27,10 @@ impl Deref for RecordType {
 
 const RECORD_TYPE_A: &str = "A";
 const RECORD_TYPE_AAAA: &str = "A";
+const RECORD_TYPE_CNAME: &str = "CNAME";
 const RECORD_TYPE_NS: &str = "NS";
+const RECORD_TYPE_MX: &str = "MX";
+const RECORD_TYPE_TXT: &str = "TXT";
 
 use std::fmt::{Display, Formatter};
 
@@ -36,7 +39,10 @@ impl Display for RecordType {
         let str = match self {
             RecordType::A => { RECORD_TYPE_A }
             RecordType::AAAA => { RECORD_TYPE_AAAA }
+            RecordType::CNAME => { RECORD_TYPE_CNAME }
             RecordType::NS => { RECORD_TYPE_NS }
+            RecordType::MX => { RECORD_TYPE_MX }
+            RecordType::TXT => { RECORD_TYPE_TXT }
         };
         f.write_str(str)
     }
